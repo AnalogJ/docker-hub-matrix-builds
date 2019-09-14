@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 # retrieve the latest jq release info
 
 RELEASE_URL="https://api.github.com/repos/stedolan/jq/releases/"
@@ -16,4 +16,5 @@ asset_url=$(curl -s "${RELEASE_URL}" \
 curl -L -o /usr/bin/jq "$asset_url"
 
 # make jq executable
-chmod +x jq
+chmod +x /usr/bin/jq
+jq --version
