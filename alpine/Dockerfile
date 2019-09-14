@@ -1,6 +1,6 @@
 FROM alpine
 
-RUN apk install curl
+RUN apk add curl
 
 COPY ./install-software.sh .
 

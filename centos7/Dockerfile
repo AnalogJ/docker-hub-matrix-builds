@@ -1,4 +1,4 @@
-FROM centos:cento7
+FROM centos:centos7
 
 RUN yum install curl
 

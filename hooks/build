@@ -1,0 +1,18 @@
+#!/bin/bash
+
+###############################################################################
+# WARNING
+# This is a symlinked file. The original lives at hooks/build in this repository
+###############################################################################
+
+# original docker build command
+echo "overwriting docker build -f $DOCKERFILE_PATH -t $IMAGE_NAME ."
+
+cat "../software-versions.txt" | while read software_version_line
+do
+        # The new image tag will include the version of our software, prefixed to the os image we're currently building
+        IMAGE_TAG="${DOCKER_REPO}:${software_version_line}-${DOCKER_TAG}"
+
+        echo "docker build -f Dockerfile --build-arg software_version=${software_version_line} -t ${IMAGE_TAG} ../"
+        docker build -f Dockerfile --build-arg software_version=${software_version_line} -t ${IMAGE_TAG} ../
+done

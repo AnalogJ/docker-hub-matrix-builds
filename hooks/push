@@ -1,0 +1,18 @@
+#!/bin/bash
+
+###############################################################################
+# WARNING
+# This is a symlinked file. The original lives at hooks/push in this repository
+###############################################################################
+
+# original docker push command
+echo "overwriting docker push $IMAGE_NAME"
+
+cat "../software-versions.txt" | while read software_version_line
+do
+    # The new image tag will include the version of our software, prefixed to the os image we're currently building
+    IMAGE_TAG="${DOCKER_REPO}:${software_version_line}-${DOCKER_TAG}"
+
+    echo "docker push ${IMAGE_TAG}"
+    docker push ${IMAGE_TAG}
+done
